@@ -49,3 +49,12 @@ path.resolve("/");  // => 'D:\\'
 -	如果抛出TypeError，说明参数不是String类型的
 
 
+## 参考
+
+> [koa - webpack-dev-middleware](http://www.tuicool.com/articles/MruEni)
+https://github.com/yiminghe/koa-webpack-dev-middleware/blob/master/index.js
+https://webpack.js.org/guides/development/#webpack-dev-middleware
+http://www.jianshu.com/p/0ecd727107bb
+https://github.com/rccoder/blog/issues/18
+https://cnodejs.org/topic/586823335eac96bb04d3e305
+https://github.com/chikara-chan/react-isomorphic-boilerplate
