@@ -12,6 +12,7 @@
 
 -	webpack-dev-middleware - 使用中间件的方式，对于已有node服务或者希望完全控制服务器很有用
 	-	中间件会使webpack的编译过程在内存中进行, 编译执行时会延迟请求直到编译完成
+	-	使用koa框架构建web应用需要重新封装一下webpack-dev-middleware
 
 
 
@@ -48,13 +49,24 @@ path.resolve("/");  // => 'D:\\'
 
 -	如果抛出TypeError，说明参数不是String类型的
 
+## yarn
+
+安装： 
+-	windows下直接下载.msi安装包安装
+-	通过Chocolatey安装，需要管理员模式运行PowerShell v3+ 版本
+	-	Chocolatey安装命令： `iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex`
+	-	禁止脚本运行报错: `set-ExecutionPolicy RemoteSigned`
+	-	yarn安装命令: `choco install yarn`
+
 
 ## 参考
 
 > [koa - webpack-dev-middleware](http://www.tuicool.com/articles/MruEni)
-https://github.com/yiminghe/koa-webpack-dev-middleware/blob/master/index.js
-https://webpack.js.org/guides/development/#webpack-dev-middleware
-http://www.jianshu.com/p/0ecd727107bb
-https://github.com/rccoder/blog/issues/18
-https://cnodejs.org/topic/586823335eac96bb04d3e305
-https://github.com/chikara-chan/react-isomorphic-boilerplate
+> https://github.com/yiminghe/koa-webpack-dev-middleware/blob/master/index.js
+> https://webpack.js.org/guides/development/#webpack-dev-middleware
+> http://www.jianshu.com/p/0ecd727107bb
+> https://github.com/rccoder/blog/issues/18
+> https://cnodejs.org/topic/586823335eac96bb04d3e305
+> https://github.com/chikara-chan/react-isomorphic-boilerplate
+> [chocolatey](https://chocolatey.org/install)
+> [yarn安装](http://www.jianshu.com/p/d2f88722aef9)
