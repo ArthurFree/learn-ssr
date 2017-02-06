@@ -5,9 +5,7 @@ const help = require('./constants.js');
 
 const rootPath = help.rootPath;
 
-
-
 module.exports = {
-	context: path.resolve(__dirname, '..'),
+	context: path.resolve(__dirname, '../'),
 	extry: {}
 }
