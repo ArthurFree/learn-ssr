@@ -1,4 +1,4 @@
--	???? nodemon ????
+-	nodemon: 服务器端监听代码改动
 -	???? cross-env NODE_ENV ????
 
 -	node
@@ -21,6 +21,9 @@
 -	webpack-dev-middleware - 使用中间件的方式，对于已有node服务或者希望完全控制服务器很有用
 	-	中间件会使webpack的编译过程在内存中进行, 编译执行时会延迟请求直到编译完成
 	-	使用koa框架构建web应用需要重新封装一下webpack-dev-middleware
+-	Hot Module Replace
+	-	entry中添加"webpack-hot-middleware/client?reload=true"，reload的意思是当不能hot replace的时候，就整页刷新
+	-	plugins中添加插件`webpack.optimize.OccurrenceOrderPlugin(webpack2中修改,[修改内容在这里](http://stackoverflow.com/questions/37916005/typeerror-webpack2-default-optimize-occurenceorderplugin-is-not-a-function/37916006))`、`webpack.HotModuleReplacementPlugin`和`webpack.NoEmitOnErrorsPlugin(原为webpack.NoErrorsPlugin,webpack2中已修改)`
 
 
 
@@ -147,3 +150,6 @@ path.resolve("/");  // => 'D:\\'
 > https://github.com/chikara-chan/react-isomorphic-boilerplate
 > [chocolatey](https://chocolatey.org/install)
 > [yarn安装](http://www.jianshu.com/p/d2f88722aef9)
+> [Express结合Webpack的全栈自动刷新](https://segmentfault.com/a/1190000004505747)
+> [koa中webpack热加载&&NODE_ENV配置](https://segmentfault.com/a/1190000004968387)
+> [为 Koa 框架封装 webpack-dev-middleware 中间件](https://segmentfault.com/a/1190000004883199)

@@ -5,7 +5,15 @@ const help = require('./constants.js');
 
 const rootPath = help.rootPath;
 
-module.exports = {
-	context: path.resolve(__dirname, '../'),
-	extry: {}
-}
+var _cfg = Object.assign({}, webpackBaseCfg, {
+	debug: true,
+	devtool: "source-map"
+});
+
+Object.getOwnPropertyNames(_cfg.entry).map(function (name) {
+	_cfg.entry[name] = []
+		.concat("webpack-hot-middleware/client")
+		.concat(webpackBaseCfg.entry[name])
+});
+
+module.exports = _cfg;
