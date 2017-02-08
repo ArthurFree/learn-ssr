@@ -1,13 +1,13 @@
 var path = require('path');
 var express = require('express');
 var webpack = require('webpack');
-var config = require('./webpack.config.js');
+var config = require('./build/webpack.config.dev.js');
 
 
 var app = express();
 var compiler = webpack(config);
 
-app.ues(require('webpack-dev-middleware')(compiler, {
+app.use(require('webpack-dev-middleware')(compiler, {
 	noInfo: true,
 	publicPath: config.output.publicPath,
 	inline: true,
@@ -15,3 +15,9 @@ app.ues(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
+
+app.get('/', function (req, res) {
+	res.sendFile(path.join(__dirname, "./index.html"));
+});
+
+app.listen(5000);

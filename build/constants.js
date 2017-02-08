@@ -2,11 +2,12 @@ var path = require("path");
 var rootPath = path.join(__dirname, "../");
 
 var obj = {
+	rootPath: rootPath,
 	pages: [
 		{
 			name: "index",
 			title: "hello, world",
-			entry: "index",
+			entry: path.join(rootPath, "./client/index.js"),
 			output: path.join(rootPath)
 		}
 	]

@@ -1,5 +1,5 @@
--	nodemon: 服务器端监听代码改动
--	???? cross-env NODE_ENV ????
+-	nodemon: 服务器端监听代码改动, 与supervisor差不多
+-	cross-env NODE_ENV: 设置当前环境变量
 
 -	node
 	-	__dirname： 获取当前文件所在目录的完整目录名
@@ -7,23 +7,41 @@
 
 -	webpack
 	-	context： 设置基础目录，一个绝对路径
+
 	-	entry: 
 		-	vendor： 将项目中的相互独立，互不依赖的外部引用打包在一起，通过CommonChunkPlugin
 
 	-	output： 
 		-	path： 输出目录的绝对路径
 		-	publicPath： 输出目录的公共URL(参见：https://webpack.js.org/configuration/output/#output-path)
+
 	-	resolve：
 		-	alias： 别名
+		-	extensions： 第一个值不能为空(即: "")
+
 	-	devtool： 增强调试过程，一般选择`cheap-source-map`
+
 	- 	cache： 缓存已生成webpack模块，提高打包速度(Cache the generated webpack modules and chunks to improve build speed)
 
+	-	debug： 调试模式，在webpack2中被删除，并移入loader中
+	-	module: 
+		-	loaders: webpack2中修改为`rules`
+
+	-	plugins： 
+		-	HtmlwebpackPlugin: 将打包的js文件塞入html中
+		-	DefinePlugin: 允许你创建可以在编译时配置的全局常量
+		-	ExtractTextPlugin: 将css文件从js文件中分离出来
+
 -	webpack-dev-middleware - 使用中间件的方式，对于已有node服务或者希望完全控制服务器很有用
+	
 	-	中间件会使webpack的编译过程在内存中进行, 编译执行时会延迟请求直到编译完成
 	-	使用koa框架构建web应用需要重新封装一下webpack-dev-middleware
+
 -	Hot Module Replace
 	-	entry中添加"webpack-hot-middleware/client?reload=true"，reload的意思是当不能hot replace的时候，就整页刷新
+	
 	-	plugins中添加插件`webpack.optimize.OccurrenceOrderPlugin(webpack2中修改,[修改内容在这里](http://stackoverflow.com/questions/37916005/typeerror-webpack2-default-optimize-occurenceorderplugin-is-not-a-function/37916006))`、`webpack.HotModuleReplacementPlugin`和`webpack.NoEmitOnErrorsPlugin(原为webpack.NoErrorsPlugin,webpack2中已修改)`
+	-	OccurrenceOrderPlugin: 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
 
 
 
