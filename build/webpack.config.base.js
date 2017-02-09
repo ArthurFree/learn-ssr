@@ -46,13 +46,16 @@ module.exports = {
 					presets: ['es2015', 'react', 'stage-0']
 				}
 			},
-			// {
-			// 	test: /.css?$/,
-			// 	use: ExtractTextPlugin.extract({
-			// 		fallback: "style-loader",
-			// 		use: "css-loader"
-			// 	})
-			// }
+			{
+				test: /.css?$/,
+				// use: ExtractTextPlugin.extract({
+				// 	// fallback: "style-loader",
+				// 	use: "css-loader"
+				// })
+				use: ExtractTextPlugin.extract({
+					loader: "css-loader"
+				})
+			}
 		]
 	},
 	// plugins: [

@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./client/outside/js/login.js"],"names":["console","log"],"mappings":";;;;;;;;;;;;;;;;;AAAAA,QAAQC,GAAR,CAAY,eAAZ,E","file":"login.js","sourcesContent":["console.log(\"this is login\");\n\n\n// WEBPACK FOOTER //\n// ./client/outside/js/login.js"],"sourceRoot":""}

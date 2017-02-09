@@ -9,6 +9,11 @@ var obj = {
 			title: "hello, world",
 			entry: path.join(rootPath, "./client/index.js"),
 			output: path.join(rootPath)
+		},
+		{
+			name: "login",
+			title: "login",
+			entry: path.join(rootPath, "./client/outside/js/login.js")
 		}
 	]
 }

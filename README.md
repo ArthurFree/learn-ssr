@@ -1,5 +1,5 @@
 -	nodemon: 服务器端监听代码改动, 与supervisor差不多
--	cross-env NODE_ENV: 设置当前环境变量
+-	cross-env NODE_ENV: 能够不分系统地在全局注入变量
 
 -	node
 	-	__dirname： 获取当前文件所在目录的完整目录名
@@ -26,11 +26,15 @@
 	-	debug： 调试模式，在webpack2中被删除，并移入loader中
 	-	module: 
 		-	loaders: webpack2中修改为`rules`
-
+	-	externals: 防止打包某些 import 的包(package)，而是在运行时再去获取这些外部扩展包(package)
 	-	plugins： 
-		-	HtmlwebpackPlugin: 将打包的js文件塞入html中
+		-	HtmlwebpackPlugin: 将打包的js文件塞入html中,在页面中自动注入 js 和 css
 		-	DefinePlugin: 允许你创建可以在编译时配置的全局常量
 		-	ExtractTextPlugin: 将css文件从js文件中分离出来
+		-	ProvidePlugin： 自动加载模块
+
+-	css-loader: 是处理css文件中的url()等
+-	style-loader: 将css插入到页面的style标签
 
 -	webpack-dev-middleware - 使用中间件的方式，对于已有node服务或者希望完全控制服务器很有用
 	
@@ -42,6 +46,27 @@
 	
 	-	plugins中添加插件`webpack.optimize.OccurrenceOrderPlugin(webpack2中修改,[修改内容在这里](http://stackoverflow.com/questions/37916005/typeerror-webpack2-default-optimize-occurenceorderplugin-is-not-a-function/37916006))`、`webpack.HotModuleReplacementPlugin`和`webpack.NoEmitOnErrorsPlugin(原为webpack.NoErrorsPlugin,webpack2中已修改)`
 	-	OccurrenceOrderPlugin: 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
+
+-	???? 为什么要使用CSS Module ????
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -120,6 +145,15 @@ export default (compiler, options = {}) => {
 	};
 }
 ```
+
+
+
+
+
+
+
+
+
 
 
 
