@@ -92,8 +92,28 @@ mapBtn.click(function () {
 
 
 
+## Redux
 
-
+概念：
+-	`state`: app中状态存放的地方，并且state是只读的，不同于React，Redux中的state的更改，其实是创建了一个全新的state
+-	`action`: 是一个对象，作用和他的名字一样，用来表明，你想要做的那件事情，改对象的属性type，用来标记，你要作的事情
+-	`reducer`: 是一个函数，接受当前state，和一个action作为参数，依据action基于当前的`state`生成新的`state`
+-	`dispatch`: 推送某个`action`给`reducer`
+-	`异步action`: 返回一个函数，和中间件配合可以很容易的实现异步操作
+-	`store`： 可以理解为`state`的家，全局只有一个，有以下方法
+	-	`getState()`: 获取当前的state树
+	-	`dispatch(action)`: 触发一个action，创建state
+	-	`subscribe(listener)`
+	-	`replaceReducer(nextReducer)`
+-	`combineRedecers(reducers)`: 当应用比较复杂的时候，我们可能会分开写好几个reducer，这个函数的作用就是把这些单独的reduce合并为一个大的reduce，需要注意的是我们的state的结构和我们的各个`reducer`是一一对应的
+-	`applyMiddleware(...middlewares)`： 告诉redux我们会用到哪些中间件，比如说要用到基础的异步，我们会用到thunk中间件
+```
+let store = createStore(
+	comRedcer,
+	applyMiddleware(thunk)
+)
+```
+-	`bindActionCreators()`: 绑定`actionCreator`和`dispatch`以供直接使用
 
 
 
