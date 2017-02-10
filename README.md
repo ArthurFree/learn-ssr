@@ -52,13 +52,43 @@
 
 
 
+## webpack异步加载
 
+webpack ensure 把js模块独立导出一个.js文件，然后使用这个模块的时候，webpack会构造script dom 元素,由浏览器发起异步请求这个js文件
 
+场景分析：
+比如应用的首页里有一个按钮，点击后可以打开某个地图。打开地图的话就要利用百度地图的js，我们不得不在首页中把百度地图的js一起打包进去首页，一个百度地图的js文件非常大，假设为1m，于是造成我们的首页打包的js非常大，用户代开首页的时间就比较长。
 
+解决方法：
 
+1. 将百度地图js分类出去，利用浏览器的并发请求js文件处理。为baidumap.js配置一个新的入口，这样就可以打包成两个js文件，都插入html即可（如果baidumap.js被多个入口文件引用的话，可以直接利用CommonsChunkPlugin，导出到一个公共模块即可）
 
+2. 百度地图是用户点击了才弹出来的，也就是说，这个功能是可选的。那么久当用户点击的时候，在去下载百度地图的js。当用户点击的时候创建一个`script`标签来加载这个js文件
+```
+mapBtn.click(function() {
+	// 获取文档head对象
+	var head = document.querySelector("head");
+	// 构建 <script>
+	var script = document.createElement('script');
+	// 设置src属性
+	script.async = true;
+	script.src = "http://map.baidu.com/.js"
+	//加入到head对象中
+	head.appendChild(script);
+});
+```
+浏览器会自动帮我们发起请求，请求这个js文件，写个回调去定义在得到这个js文件之后操作
 
+```
+mapBtn.click(function () {
+	require.ensure([], function() {
+		var baidumap = require('./baidumap.js') // baidumap.js放在我们当前目录下
+	})
+})
+```
 
+参考：
+> [webpack代码分离 ensure ](https://cnodejs.org/topic/586823335eac96bb04d3e305)
 
 
 
@@ -211,28 +241,11 @@ path.resolve("/");  // => 'D:\\'
 
 暂记网站
 
-https://gold.xitu.io/timeline/frontend | 前端 - 掘金
 http://caibaojian.com/mobile-responsive-example.html | 移动前端自适应解决方案和比较-前端开发博客
 https://gold.xitu.io/post/589965c9128fe1006569cc9d | Flex 布局应用 - Aitter - 掘金专栏
-http://10.90.0.15:8090/pages/viewpage.action?pageId=885711 | 10 服务器信息 - SFA - Confluence
-
 https://segmentfault.com/a/1190000006178770 | 入门 Webpack，看这篇就够了 - 前端学习笔记 - SegmentFault
 
-https://webpack.js.org/configuration/module/ | Module
-https://webpack.js.org/configuration/module/ | Module
-https://webpack.js.org/plugins/extract-text-webpack-plugin/ | ExtractTextWebpackPlugin
-https://www.npmjs.com/package/extract-text-webpack-plugin | extract-text-webpack-plugin
-http://blog.csdn.net/linyeban/article/details/54923215 | 使用webpack2和extract-text-webpack-plugin时遇到Chunk.entry was removed. Use hasRuntime()错误的解决方法 - linyeban的博客 - 博客频道 - CSDN.NET
-https://github.com/webpack-contrib/extract-text-webpack-plugin/issues?page=2&q=is%3Aissue+is%3Aopen | Issues · webpack-contrib/extract-text-webpack-plugin
-https://github.com/shakacode/bootstrap-loader/issues/238 | bootstrap-loader fails when extractStyles is enabled (set to true) · Issue #238 · shakacode/bootstrap-loader
-https://github.com/webpack-contrib/extract-text-webpack-plugin | webpack-contrib/extract-text-webpack-plugin: Extract text from bundle into a file.
 
-http://babeljs.io/docs/plugins/#presets | Plugins · Babel
-
-https://nodejs.org/dist/latest-v6.x/docs/api/process.html#process_process_env | process | Node.js v6.9.5 Documentation
-
-https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=corss-env%20NODE_ENV&oq=corss-env&rsv_pq=9232a2140005c726&rsv_t=8434YjDG0%2BNAo2t3tJll4InykfSU2D4ctKHL7ib9mBfndktpt1VrPF4M3Q0&rqlang=cn&rsv_enter=1&inputT=5385&rsv_sug3=20&rsv_sug2=0&rsv_sug4=10030 | corss-env NODE_ENV_百度搜索
-https://webpack.js.org/guides/migrating/#module-loaders-is-now-module-rules | Migrating from v1 to v2
 https://segmentfault.com/a/1190000004968387 | koa中webpack热加载&&NODE_ENV配置 - zhanfang - SegmentFault
 https://segmentfault.com/a/1190000005037309 | 手把手教你基于ES6架构自己的React Boilerplate项目 - 令狐葱@Web前端笔记 - SegmentFault
 https://github.com/kentcdodds/cross-env | kentcdodds/cross-env: Cross platform setting of environment scripts
@@ -241,19 +254,13 @@ https://segmentfault.com/a/1190000004505747 | Express结合Webpack的全栈自�
 http://stackoverflow.com/questions/37916005/typeerror-webpack2-default-optimize-occurenceorderplugin-is-not-a-function/37916006 | webpack - TypeError: _webpack2.default.optimize.OccurenceOrderPlugin is not a function - Stack Overflow
 https://segmentfault.com/a/1190000004883199 | 为 Koa 框架封装 webpack-dev-middleware 中间件 - 太极客（Very Geek） - SegmentFault
 
-https://github.com/glenjamin/webpack-hot-middleware | glenjamin/webpack-hot-middleware: Webpack hot reloading you can attach to your own server
 
 https://cnodejs.org/?tab=good | CNode：Node.js专业中文社区
 https://jysperm.me/2016/10/nodejs-error-handling/ | Node.js 错误处理实践 | 王子亭的博客
 https://cnodejs.org/topic/586823335eac96bb04d3e305 | webpack代码分离 ensure 看了还不懂，你打我 - CNode技术社区
-https://github.com/webpack/webpack-dev-middleware/blob/master/middleware.js | webpack-dev-middleware/middleware.js at master · webpack/webpack-dev-middleware
-https://github.com/webpack/webpack-dev-middleware | webpack/webpack-dev-middleware: Offers a dev middleware for webpack, which arguments a live bundle to a directory
-https://github.com/shellscape/koa-webpack/blob/master/index.js | koa-webpack/index.js at master · shellscape/koa-webpack
-https://github.com/leecade/koa-webpack-middleware/blob/master/middleware/devMiddleware.js | koa-webpack-middleware/devMiddleware.js at master · leecade/koa-webpack-middleware
+
 http://www.jianshu.com/p/0ecd727107bb | 教你如何搭建一个超完美的服务端渲染开发环境 - 简书
-https://github.com/chikara-chan?tab=stars | chikara-chan (Chikara Chan) / Starred
-https://github.com/webpack/webpack-dev-middleware/blob/master/middleware.js#L175 | webpack-dev-middleware/middleware.js at master · webpack/webpack-dev-middleware
+
 http://es6.ruanyifeng.com/#docs/promise | Promise 对象 - ECMAScript 6入门
-https://github.com/ArthurFree/learn-react/blob/master/base-environment/webpack.config.js | learn-react/webpack.config.js at master · ArthurFree/learn-react
 https://github.com/yiminghe/koa-webpack-dev-middleware | yiminghe/koa-webpack-dev-middleware: webpack dev middleware for koa
 http://koa.bootcss.com/ | Koa (koajs) -- 基于 Node.js 平台的下一代 web 开发框架 | Koajs 中文文档
