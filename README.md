@@ -49,7 +49,11 @@
 
 -	???? 为什么要使用CSS Module ????
 
+## redux
 
+react-redux
+
+Redux的运作方式： 首先需要注册一个全局唯一的store对象，用来维护整个应用的state；当要变更state时，我们会dispatch一个action，reducer根据action更新相应的state
 
 
 ## webpack异步加载
