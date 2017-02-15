@@ -9,6 +9,11 @@ const node_modules = path.resolve(__dirname, 'node_modules');
 var entries = {};
 help.pages.map((p) => { if (!!p.entry) entries[p.name] = p.entry; });
 
+
+console.log("rootPath", rootPath);
+
+console.log("utilsPath", path.join(rootPath, "./client/utils"));
+
 module.exports = {
 	cache: true,
 	entry: entries,

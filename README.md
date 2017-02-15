@@ -49,11 +49,6 @@
 
 -	???? 为什么要使用CSS Module ????
 
-## redux
-
-react-redux
-
-Redux的运作方式： 首先需要注册一个全局唯一的store对象，用来维护整个应用的state；当要变更state时，我们会dispatch一个action，reducer根据action更新相应的state
 
 
 ## webpack异步加载
@@ -95,8 +90,12 @@ mapBtn.click(function () {
 > [webpack代码分离 ensure ](https://cnodejs.org/topic/586823335eac96bb04d3e305)
 
 
+------------------------------------------------------------------------------------------------------
+
 
 ## Redux
+
+Redux的运作方式： 首先需要注册一个全局唯一的store对象，用来维护整个应用的state；当要变更state时，我们会dispatch一个action，reducer根据action更新相应的state
 
 概念：
 -	`state`: app中状态存放的地方，并且state是只读的，不同于React，Redux中的state的更改，其实是创建了一个全新的state
@@ -119,10 +118,27 @@ let store = createStore(
 ```
 -	`bindActionCreators()`: 绑定`actionCreator`和`dispatch`以供直接使用
 
+-----------------------------------------------------------------------------------------------------
 
 
+## react-router-redux
 
+## react-router
 
+withRouter - withRouter(Component, [options])
+
+对组件进行封装，然后再某个具体的组件内部，可以使用`this.props.router`来获取`router`对象
+
+`router`对象常用方法:
+-	replace(pathOrLoc)
+-	go(n)
+-	goBack()
+-	goForward()
+
+参考： [
+React Router最新指南与异步加载实践](https://segmentfault.com/a/1190000006063554)
+
+-----------------------------------------------------------------------------------------------------
 
 ## 为koa框架封装webpack-dev-middleware中间件
 
@@ -202,15 +218,7 @@ export default (compiler, options = {}) => {
 
 
 
-
-
-
-
-
-
-
-
-
+------------------------------------------------------------------------------------------------------
 
 ## path.resolve()
 
@@ -235,6 +243,10 @@ path.resolve("/");  // => 'D:\\'
 
 -	如果抛出TypeError，说明参数不是String类型的
 
+
+
+--------------------------------------------------------------------------------------------------------
+
 ## yarn
 
 安装： 
@@ -243,6 +255,9 @@ path.resolve("/");  // => 'D:\\'
 	-	Chocolatey安装命令： `iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex`
 	-	禁止脚本运行报错: `set-ExecutionPolicy RemoteSigned`
 	-	yarn安装命令: `choco install yarn`
+
+
+---------------------------------------------------------------------------------------------------------
 
 
 ## 参考
@@ -261,9 +276,9 @@ path.resolve("/");  // => 'D:\\'
 > [为 Koa 框架封装 webpack-dev-middleware 中间件](https://segmentfault.com/a/1190000004883199)
 
 
+----------------------------------------------------------------------------------------------------------
 
-
-暂记网站
+## 暂记网站
 
 http://caibaojian.com/mobile-responsive-example.html | 移动前端自适应解决方案和比较-前端开发博客
 https://gold.xitu.io/post/589965c9128fe1006569cc9d | Flex 布局应用 - Aitter - 掘金专栏
